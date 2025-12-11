@@ -1,4 +1,15 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
 
-// The application has been migrated to a static HTML/JS/CSS architecture.
-// This file is kept as an entry point placeholder but does not mount React.
-console.log("Storm Academy: Static Mode Initialized");
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error("Could not find root element to mount to");
+}
+
+const root = ReactDOM.createRoot(rootElement);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);

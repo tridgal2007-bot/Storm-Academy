@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Storm Academy | Gameplay Roblox</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Rajdhani:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              comic: ['Bangers', 'cursive'],
+              tech: ['Rajdhani', 'sans-serif'],
+            },
+            colors: {
+              storm: { accent: '#fcd34d', red: '#ef4444', green: '#22c55e', dark: '#0f172a' }
+            }
+          }
+        }
+      }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-storm-dark text-slate-50 overflow-x-hidden">
+    
+    <div id="lightning-flash-overlay"></div>
+    <canvas id="rain-canvas"></canvas>
+    <canvas id="lightning-canvas"></canvas>
+    <div class="cloud-container">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="fog-anim"></div>
+        <div class="fog-layer"></div>
+    </div>
+
+    <!-- Copied Navbar with Updated Links -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3 md:py-4 border-b-4 border-transparent">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 group z-50 transform -skew-x-6 hover:skew-x-0 transition-transform">
+                <div class="p-1 md:p-2 bg-storm-accent border-2 border-black shadow-[2px_2px_0px_#000] md:shadow-[4px_4px_0px_#000] group-hover:bg-white transition-colors">
+                    <div class="animate-eternal-zap">
+                        <i data-lucide="zap" class="text-black w-6 h-6 md:w-8 md:h-8 fill-current"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col leading-none">
+                    <span class="font-comic text-2xl md:text-3xl tracking-wide text-white drop-shadow-[2px_2px_0px_#000] italic">STORM</span>
+                    <span class="font-comic text-lg md:text-xl text-storm-accent drop-shadow-[1px_1px_0px_#000]">ACADEMY</span>
+                </div>
+            </a>
+            <div class="hidden lg:flex items-center gap-6">
+                 <a href="https://www.roblox.com/share/g/535597375" target="_blank" class="flex items-center gap-2 bg-black/50 px-3 py-1 rounded border border-white/20 mr-4 hover:bg-white hover:text-black transition-all group">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Roblox_Logo_2022.jpg" class="w-5 h-5 rounded-sm grayscale group-hover:grayscale-0 transition-all cursor-pointer" title="Available on Roblox">
+                    <span class="text-[10px] font-tech font-bold text-slate-400 group-hover:text-black uppercase tracking-widest">Grupo Roblox</span>
+                </a>
+                <a href="game.html" class="font-comic text-xl text-white hover:text-storm-accent uppercase tracking-wide hover:scale-110 transition-transform">O Jogo</a>
+                <a href="classes.html" class="font-comic text-xl text-white hover:text-storm-accent uppercase tracking-wide hover:scale-110 transition-transform">Individualidades</a>
+                <a href="media.html" class="font-comic text-xl text-white hover:text-storm-accent uppercase tracking-wide hover:scale-110 transition-transform">Galeria</a>
+                <a href="community.html" class="font-comic text-xl text-white hover:text-storm-accent uppercase tracking-wide hover:scale-110 transition-transform">Exame</a>
+                <a href="https://discord.gg/Ap2C35dW" target="_blank" class="btn-hero bg-[#5865F2] text-white px-6 py-2 border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_#fff] hover:-translate-y-1">
+                    <div class="flex items-center gap-2 skew-x-12">DISCORD</div>
+                </a>
+            </div>
+            <button id="mobile-toggle" class="lg:hidden text-white bg-black border-2 border-storm-accent p-2 transform -skew-x-12"><i data-lucide="menu" class="w-8 h-8 skew-x-12"></i></button>
+        </div>
+        <div id="mobile-menu" class="fixed inset-0 bg-storm-dark/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-6 opacity-0 pointer-events-none transition-opacity duration-300 p-6">
+            <a href="https://www.roblox.com/share/g/535597375" target="_blank" class="flex flex-col items-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Roblox_Logo_2022.jpg" class="w-16 h-16 rounded-lg mb-2 hover:scale-110 transition-transform">
+                <span class="text-white font-tech uppercase tracking-widest">Grupo Roblox</span>
+            </a>
+            <div class="w-full h-1 bg-white/10 my-2"></div>
+            <a href="game.html" class="mobile-link font-comic text-4xl text-white hover:text-storm-accent">O Jogo</a>
+            <a href="classes.html" class="mobile-link font-comic text-4xl text-white hover:text-storm-accent">Individualidades</a>
+            <a href="media.html" class="mobile-link font-comic text-4xl text-white hover:text-storm-accent">Galeria</a>
+            <a href="community.html" class="mobile-link font-comic text-4xl text-white hover:text-storm-accent">Exame</a>
+            <div class="w-full h-1 bg-white/10 my-2"></div>
+            <a href="https://discord.gg/Ap2C35dW" class="font-comic text-4xl text-[#5865F2]">Discord</a>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <section class="py-24 md:py-32 bg-storm-dark relative overflow-hidden min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10 pt-16 md:pt-20">
+            <div class="text-center mb-12 md:mb-20 reveal-on-scroll">
+                <span class="bg-storm-accent text-black px-4 py-1 font-comic uppercase text-lg md:text-xl shadow-[4px_4px_0px_#000] inline-block transform -skew-x-12 mb-4">Sistema de Jogo</span>
+                <h2 class="font-comic text-5xl md:text-8xl text-white mb-6 drop-shadow-[5px_5px_0px_#000]">
+                    ROBLOX <span class="text-storm-red italic">AÇÃO TOTAL</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <div class="comic-box p-6 md:p-8 reveal-on-scroll delay-100">
+                    <div class="inline-block p-3 md:p-4 bg-storm-accent border-2 border-black mb-4 md:mb-6 transform -rotate-6 shadow-[4px_4px_0px_#000]">
+                        <i data-lucide="gamepad-2" class="w-6 h-6 md:w-8 md:h-8 text-black"></i>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-comic text-white mb-3 md:mb-4">Controles Roblox</h3>
+                    <p class="text-slate-300 font-tech text-base md:text-lg leading-relaxed">Gameplay otimizada para PC e Mobile. Use suas habilidades (Q, E, R, F) para destruir cenários inteiros.</p>
+                </div>
+                <div class="comic-box p-6 md:p-8 reveal-on-scroll delay-200">
+                    <div class="inline-block p-3 md:p-4 bg-storm-red border-2 border-black mb-4 md:mb-6 transform rotate-3 shadow-[4px_4px_0px_#000]">
+                        <i data-lucide="swords" class="w-6 h-6 md:w-8 md:h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-comic text-white mb-3 md:mb-4">PVP Ranqueado</h3>
+                    <p class="text-slate-300 font-tech text-base md:text-lg leading-relaxed">Suba de Rank E para Rank S na Associação de Heróis. Lute em arenas flutuantes.</p>
+                </div>
+                <div class="comic-box p-6 md:p-8 reveal-on-scroll delay-300">
+                    <div class="inline-block p-3 md:p-4 bg-storm-green border-2 border-black mb-4 md:mb-6 transform -rotate-3 shadow-[4px_4px_0px_#000]">
+                        <i data-lucide="users" class="w-6 h-6 md:w-8 md:h-8 text-black"></i>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-comic text-white mb-3 md:mb-4">Clãs & Agências</h3>
+                    <p class="text-slate-300 font-tech text-base md:text-lg leading-relaxed">Crie sua própria Agência de Heróis no Roblox, recrute amigos e domine territórios.</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 md:mt-20 relative border-4 border-black shadow-[8px_8px_0px_#fcd34d] md:shadow-[10px_10px_0px_#fcd34d] bg-black h-[300px] md:h-[500px] reveal-on-scroll transform -skew-x-2">
+                 <img src="https://images.unsplash.com/photo-1542259681-d4cd7193bc86?q=80&w=1600&auto=format&fit=crop" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-300">
+                 <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-6 md:p-10">
+                     <h3 class="text-3xl md:text-5xl font-comic text-white italic drop-shadow-md">MAPA MUNDO ABERTO</h3>
+                     <p class="text-storm-accent font-tech text-lg md:text-2xl mt-2 max-w-lg bg-black/50 inline-block px-2">Explore Musutafu e a U.A. recriadas.</p>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

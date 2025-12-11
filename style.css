@@ -1,0 +1,327 @@
+/* Base Styles & Utility overrides */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Rajdhani:wght@500;600;700&display=swap');
+
+:root {
+    --color-plus-ultra: #fcd34d; /* All Might Yellow */
+    --color-smash-red: #ef4444;   /* Smash Red */
+    --color-deku-green: #22c55e;  /* Lightning Green */
+    --color-roblox-gray: #393b3d;
+    --color-dark: #0f172a;
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: #0f172a;
+}
+
+body {
+    cursor: default;
+    overflow-x: hidden;
+    font-family: 'Rajdhani', sans-serif;
+    background-color: #0f172a;
+    /* Halftone Pattern Background */
+    background-image: radial-gradient(circle, #ffffff 1px, transparent 1px);
+    background-size: 30px 30px;
+    background-color: #0f172a;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px; /* Thinner on mobile */
+}
+@media (min-width: 768px) {
+    ::-webkit-scrollbar {
+        width: 12px;
+    }
+}
+
+::-webkit-scrollbar-track {
+    background: #020617;
+    border-left: 1px solid #334155;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-plus-ultra);
+    border: 2px solid #020617;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #fff;
+}
+
+/* Text Selection */
+::selection {
+    background: var(--color-smash-red);
+    color: #fff;
+}
+
+/* MHA / COMIC BOOK UI STYLES */
+.font-comic {
+    font-family: 'Bangers', cursive;
+    letter-spacing: 0.05em;
+}
+
+.comic-box {
+    border: 2px solid rgba(255,255,255,0.2);
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(8px);
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+    /* Reduce skew on mobile to prevent overflow */
+    transform: skewX(-3deg); 
+}
+
+@media (min-width: 768px) {
+    .comic-box {
+        transform: skewX(-10deg);
+        box-shadow: 5px 5px 0px rgba(0,0,0,0.5);
+    }
+    .comic-box:hover {
+        border-color: var(--color-plus-ultra);
+        transform: skewX(-10deg) translateY(-5px);
+        box-shadow: 10px 10px 0px var(--color-plus-ultra);
+    }
+}
+
+.btn-hero {
+    transform: skewX(-6deg);
+    border: 2px solid transparent;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-family: 'Bangers', cursive;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .btn-hero {
+        transform: skewX(-10deg);
+    }
+}
+
+.btn-hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: 0.5s;
+}
+
+.btn-hero:hover::after {
+    left: 100%;
+}
+
+.btn-hero:active {
+    transform: skewX(-6deg) scale(0.95);
+}
+
+@media (min-width: 768px) {
+    .btn-hero:active {
+        transform: skewX(-10deg) scale(0.95);
+    }
+}
+
+/* NIGHT CITY SCENE */
+#night-sky {
+    background: linear-gradient(to bottom, #020617 0%, #0f172a 60%, #1e1b4b 100%);
+}
+
+.moon {
+    position: absolute;
+    top: 10%;
+    right: 15%;
+    width: 100px;
+    height: 100px;
+    background: #fdf6e3;
+    border-radius: 50%;
+    box-shadow: 0 0 40px #fcd34d, 0 0 80px rgba(253, 246, 227, 0.5);
+    opacity: 0.9;
+}
+
+/* City Silhouette Styles */
+.building {
+    background-color: #020617;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 10px;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+}
+
+.window-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 12px);
+    gap: 6px;
+    width: 80%;
+}
+
+.window {
+    width: 12px;
+    height: 16px;
+    background-color: #1e293b; /* Dark window (off) */
+    transition: background-color 0.5s ease;
+}
+
+.window.lit {
+    background-color: #fcd34d; /* Lit window (yellow) */
+    box-shadow: 0 0 5px #fcd34d;
+}
+
+
+/* VFX: CLOUDS & FOG */
+.cloud-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.cloud {
+    position: absolute;
+    background-repeat: repeat-x;
+    background-size: cover;
+    opacity: 0.6;
+    width: 200%;
+    height: 100%;
+}
+
+.cloud-1 {
+    background-image: url('https://raw.githubusercontent.com/yagoestevez/fcc-portfolio/master/src/Images/Clouds.png');
+    animation: move-clouds 60s linear infinite;
+    top: 0;
+    z-index: 1;
+    opacity: 0.4;
+    filter: brightness(0.5);
+}
+
+.cloud-2 {
+    background-image: url('https://raw.githubusercontent.com/yagoestevez/fcc-portfolio/master/src/Images/Clouds.png');
+    animation: move-clouds 45s linear infinite reverse;
+    top: 50px;
+    z-index: 2;
+    opacity: 0.3;
+    transform: scaleY(-1);
+}
+
+.fog-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    z-index: 5;
+}
+
+.fog-anim {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: url('https://raw.githubusercontent.com/yagoestevez/fcc-portfolio/master/src/Images/Clouds.png');
+    background-size: 50% 100%;
+    opacity: 0.2;
+    animation: move-fog 30s linear infinite;
+    mix-blend-mode: overlay;
+}
+
+@keyframes move-clouds {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes move-fog {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-20%); }
+    100% { transform: translateX(0); }
+}
+
+/* Rain and Lightning Canvas Layers */
+#rain-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 20; 
+    opacity: 0.5;
+    mix-blend-mode: screen;
+}
+
+#lightning-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 15;
+    mix-blend-mode: screen;
+}
+
+#lightning-flash-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: white;
+    z-index: 60;
+    opacity: 0;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    transition: opacity 0.1s ease-out;
+}
+
+/* Animations */
+.animate-float {
+    animation: float 4s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Logo Icon Lightning */
+.animate-eternal-zap {
+    animation: zap-flicker 2s infinite steps(5);
+}
+
+@keyframes zap-flicker {
+    0%, 100% { filter: drop-shadow(0 0 5px #fff) brightness(1); transform: scale(1); }
+    10% { filter: drop-shadow(0 0 15px #fcd34d) brightness(1.5); transform: scale(1.1) rotate(5deg); }
+    20% { filter: drop-shadow(0 0 5px #fff) brightness(1); transform: scale(1) rotate(0deg); }
+    30% { filter: drop-shadow(0 0 20px #22c55e) brightness(2); transform: scale(1.05) rotate(-5deg); }
+    40% { opacity: 0.8; }
+    50% { opacity: 1; filter: drop-shadow(0 0 10px #fcd34d); }
+    90% { transform: scale(1.05); }
+}
+
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px) skewX(-2deg);
+    transition: all 0.6s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0) skewX(0);
+}
+
+/* Roblox Badge Style */
+.roblox-badge {
+    background: linear-gradient(135deg, #111, #333);
+    border: 2px solid white;
+    box-shadow: 0 0 15px rgba(255,255,255,0.2);
+}
